@@ -1,0 +1,159 @@
+<html>
+	<header>
+		<title>Training 1</title>
+	</header>
+	<body style=" margin:50px 150px">
+		<h1 style=" text-align:center;"> Javascript  File 1  </h1>
+		<h3 style=" text-align:center;"> Grammar and types  </h3>
+		<div class="test">Testting</div>
+		<script> 
+			//Basic syntax & comments
+				
+				//JavaScript is case-sensitive and uses the Unicode character set.
+			    //a one line comment
+				/*
+					this is a longer 
+					multi line comment				
+				*/
+			//Declarations && variable scope
+				var x;    // Declares a variable(local && global), optionally initializing it to a value.
+				//let x;    // Declares a block scoped {}, local variable, optionally initializing it to value.
+				//const x=10;  //Declares a block-scoped, real-only named constant.
+			
+			//Evaluating variables
+			//Example 1 
+			
+			var a;
+			console.log("the value of a is "+ a);//the value of a is undefined
+
+			console.log("the value of a is "+ b);//the value of a is undefined
+			var b;
+			
+			//console.log("the value of a is "+ y);//y is not defined
+			
+			
+			let z;
+			console.log("the value of a is "+ z);//the value of a is undefined
+			
+			//Error--->task7.html:39 Uncaught ReferenceError: Cannot access 'c' before initialization
+			//console.log("the value of a is "+ c);//c is not defined
+			let c;
+			
+			
+			
+			//Example 2
+				var input;
+				
+				if (input === undefined) {
+					console.log("doThis");
+				} else {
+					console.log("doThat");
+				}	
+			
+				
+			//Example 3
+			
+				var myArray = [];
+				if (!myArray[0]) console.log("myFunction"); 
+				
+			//Example 4
+			
+				var q;
+				q + 2;  // Evaluates to NaN
+			
+			//Example 5
+			/*
+				When you evaluate a null variable, the null value behaves as 0 in numeric contexts and as false in boolean contexts. For example:
+			*/
+			var n= null;
+			console.log(n*32);// Will log 0 to the console
+
+			//Variable scope
+
+			//Example 1
+			
+			if (true) {
+				var p = 5;
+			}	
+			
+			console.log(p);//p=5
+			
+			//Example 2
+			if (true) {
+				let o = 5;
+			}	
+			
+			//console.log(o);//ReferenceError: o is not defined
+			
+			//Variable hoisting
+					
+			// Example 1
+			 
+			console.log(i === undefined); // true
+			var i = 3;
+			
+			var ii;
+			console.log(ii === undefined);//true
+			ii = 3;
+			
+			
+			// Example 2
+			 
+			// will return a value of undefined
+			var myvar = 'my value';
+			 			
+			(function() {
+				console.log(myvar);
+				var myvar = "local value";//undefind
+
+				var mmyvar;
+				console.log(mmyvar);//undefined
+				mmyvar = "local value";
+			})();
+			
+			//Example 
+			
+			//console.log(u); // ReferenceError --> Cannot access 'u' before initialization
+			let u = 3;
+			
+			
+			//Function hoisting
+			//In the case of functions, only function declarations are hoisted—but not the function expressions.
+			
+			//Example hoisting
+			
+			foo(); // "bar"
+
+			function foo() {
+				console.log('bar');
+			}
+
+		    // another Example not hoisting
+			
+			//baz(); // TypeError:  baz is not a function
+
+			var baz = function() {
+			  console.log('bar2');
+			};
+			
+			//You cannot declare a constant with the same name as a function or variable in the same scope. For example:
+			//Example 
+			/*
+			// THIS WILL CAUSE AN ERROR
+			function f() {};
+			const f = 5;
+
+			// THIS WILL CAUSE AN ERROR TOO
+			function f() {
+			    const g = 5;
+			    var g;
+			  //statements
+			}
+			*/
+			
+			
+			//document.getElementById("test").innerHTML=a;
+	
+		</script>	
+	</body>
+</html>
