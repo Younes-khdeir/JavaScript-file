@@ -1,0 +1,268 @@
+<html>
+	<header>
+		<title>Training 5</title>
+	</header>
+	<body style=" margin:50px 150px">
+		<h1 style=" text-align:center;"> Javascript  File 5  </h1>
+		<h3 style=" text-align:center;"> Expressions and operators</h3>
+		<div class="test">Testting</div>
+		<script> 
+			// Expressions and operators
+			/*
+			-)Assignment & Comparisons
+			-)Arithmetic operators
+			-)Bitwise & logical operators
+			-)Conditional (ternary) operator
+			*/
+			
+			/*
+			
+			-)Assignment operators
+			-)Comparison operators
+			-)Arithmetic operators
+			-)Bitwise operators
+			-)Logical operators
+			-)String operators
+			-)Conditional (ternary) operator
+			-)Comma operator
+			-)Unary operators
+			-)Relational operators
+			*/
+			
+			//A binary operator requires two operands, one before the operator and one after the operator.
+			
+			//Assignment & Comparisons
+			
+				//Assignment operators 
+				
+				function Operators(op,x=100,y=50){
+					if(op ==='=') x = y;  // Assignment
+					else if(op ==='+') x += y;	//x = x + y   Addition assignment	
+					else if(op ==='-') x -= y; //	x = x - y Subtraction assignment
+					else if(op ==='*') x *= y; //	x = x * y Multiplication assignment
+					else if(op ==='/') x /= y; //	x = x / y Division assignment
+					else if(op ==='%') x %= y;	// x = x % y  Remainder assignment
+					else if(op ==='**') x **= y;//	x = x ** y Exponentiation assignment	
+					else if(op ==='<<') x <<= y;//	x = x << y Left shift assignment
+					else if(op ==='>>') x >>= y;//	x = x >> y Right shift assignment
+					else if(op ==='>>>') x >>>= y;	//x = x >>> y Unsigned right shift assignment	
+					else if(op ==='&')x &= y ;//	x = x & y Bitwise AND assignment
+					else if(op ==='^')x ^= y;//	x = x ^ y Bitwise XOR assignment
+					else if(op ==='|')x |= y;//	x = x | y Bitwise OR assignment
+					console.log("the operators 100 50 "+op+" : "+x);
+				}
+
+				Operators('=');
+				Operators('+');
+				Operators('-');
+				Operators('*');
+				Operators('/');
+				Operators('%');
+				Operators('**');
+				Operators('<<');
+				Operators('>>');
+				Operators('>>>');
+				Operators('&');
+				Operators('^');
+				Operators('|');
+
+				//Example
+				var foo = ['one', 'two', 'three'];
+				// without destructuring
+				var one   = foo[0];
+				var two   = foo[1];
+				var three = foo[2];
+
+				// with destructuring
+				var [one, two, three] = foo;
+				
+				//Example
+				var a=10,
+					b=20;
+				console.log(a); //10
+				console.log(b);	//20
+				[a, b] =[b, a];
+    			console.log(a); //20
+				console.log(b); //10
+					
+				//Ccmparisons operators\
+				function Comparison_type(op,x=100,y=50){
+					let boo;
+					if(op ==='==') boo=(x == y);  // Equal ://Returns true if the operands are equal.  
+					else if(op ==='!=')  boo=(x != y);	// //Not equal : Returns true if the operands are not equal.	
+					else if(op ==='===') boo=(x === y);	//Strict equal :	Returns true if the operands are equal and of the same type. See also Object.is and sameness in JS.
+					else if(op ==='!==') boo=(x !== y);	//Strict not equal :Returns true if the operands are of the same type but not equal, or are of different type.	
+					else if(op ==='>=')  boo=(x >= y);	//Greater than or equal : Returns true if the left operand is greater than or equal to the right operand.	
+					else if(op ==='>')   boo=(x > y);	//Greater than :Returns true if the left operand is greater than the right operand.	
+					else if(op ==='<')   boo=(x < y);	//Less than :	Returns true if the left operand is less than the right operand.	
+					else if(op ==='<=')  boo=(x < y);	//Less than or equal:	Returns true if the left operand is less than or equal to the right operand.	
+					console.log("the operators 100 50 "+op+" : "+boo);
+				}
+				Comparison_type('=='); //the operators 100 50 == : false
+				Comparison_type('!=');//the operators 100 50 != : true
+				Comparison_type('===');//the operators 100 50 === : false
+				Comparison_type('!==');//the operators 100 50 !== : true
+				Comparison_type('>=');//the operators 100 50 >= : true
+				Comparison_type('>');//the operators 100 50 > : true
+				Comparison_type('<');//the operators 100 50 < : false
+				Comparison_type('<=');//the operators 100 50 <= : false
+
+			
+			//Arithmetic operators
+			
+			//Example
+				var z;
+				z= (1 / 2); // 0.5
+				console.log(z);
+				console.log((1 / 2));// 0.5
+				console.log(1.0 / 2.0);// 0.5
+			
+			
+			//Bitwise & logical operators
+			// bitwise operator treats their operands as a set of 32 bits (zeros and ones).
+			
+			
+			//Bitwise AND	a & b	Returns a one in each bit position for which the corresponding bits of both operands are ones.
+			//Bitwise OR	a | b	Returns a zero in each bit position for which the corresponding bits of both operands are zeros.
+			//Bitwise XOR	a ^ b	Returns a zero in each bit position for which the corresponding bits are the same.
+			//[Returns a one in each bit position for which the corresponding bits are different.]
+			//Bitwise NOT	~ a	Inverts the bits of its operand.
+			//Left shift	a << b	Shifts a in binary representation b bits to the left, shifting in zeros from the right.
+			//Sign-propagating right shift	a >> b	Shifts a in binary representation b bits to the right, discarding bits shifted off.
+			//Zero-fill right shift	a >>> b	Shifts a in binary representation b bits to the right, discarding bits shifted off, and shifting in zeros from the left.
+			
+			//Example
+			console.log((15 & 9));	// reslt 9-->	1111 & 1001 = 1001
+			console.log((15 | 9));	// reslt 15-->1111 | 1001 = 1111
+			console.log((15 ^ 9));	// reslt 	6-->1111 ^ 1001 = 0110
+			
+			
+			//Logical operators
+			//Logical AND (&&)	expr1 && expr2	Returns expr1 if it can be converted to false;otherwise, returns expr2.
+								//Thus, when used with Boolean values, && returns true if both operands are true; otherwise, returns false.
+			//Logical OR (||)	expr1 || expr2	Returns expr1 if it can be converted to true; otherwise, returns expr2. 
+								//Thus, when used with Boolean values, || returns true if either operand is true; if both are false, returns false.
+			//Logical NOT (!)	!expr	Returns false if its single operand that can be converted to true; otherwise, returns true.
+			//Example
+			var a1 =  true && true;     // t && t returns true
+			var a2 =  true && false;    // t && f returns false
+			var a3 =  false && true;     // f && t returns false
+			var a4 =  false && (3 == 4); // f && f returns false
+			var a5 =  'Cat' && 'Dog';    // t && t returns Dog
+			var a6 =  false && 'Cat';    // f && t returns false
+			var a7 =  'Cat' && false;    // t && f returns false
+			//Example
+			var o1 =  true || true;     // t || t returns true
+			var o2 = false || true;     // f || t returns true
+			var o3 =  true || false;    // t || f returns true
+			var o4 = false || (3 == 4); // f || f returns false
+			var o5 = 'Cat' || 'Dog';    // t || t returns Cat
+			var o6 = false || 'Cat';    // f || t returns Cat
+			var o7 = 'Cat' || false;    // t || f returns Cat
+			//Example
+			var n1 = !true;  // !t returns false
+			var n2 = !false; // !f returns true
+			var n3 = !'Cat'; // !t returns false
+			
+			//Conditional (ternary) operator
+			
+			//String operators
+			console.log('my ' + 'string'); // console logs the string "my string".
+			var mystring = 'alpha';
+			mystring += 'bet'; // evaluates to "alphabet" and assigns this value to mystring.
+			console.log(mystring);
+			
+			//Example
+			let age =10;
+			var status = (age >= 18) ? 'adult' : 'minor';//minor
+			console.log(status);
+			
+			//Comma operator
+			//Example
+			var x = [0,1,2,3,4,5,6,7,8,9]
+			var a = [x, x, x, x, x];
+
+			for (var i = 0, j = 9; i <= j; i++, j--)
+				console.log('a[' + i + '][' + j + ']= ' + a[i][j]);
+			 /*realt
+				a[0][9]= 9
+				a[1][8]= 8
+				a[2][7]= 7
+				a[3][6]= 6
+				a[4][5]= 5
+			 */
+			//Unary operators
+			//Example
+			myobj = new Number();
+			myobj.h = 4;    // create property h
+			console.log(delete Math.PI); // returns false (cannot delete predefined properties)
+			console.log(delete myobj.h); // returns true (can delete user-defined properties)
+
+			//Example 1 
+			
+			var trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];
+			delete trees[3];
+			if (3 in trees) {
+				// this does not get executed
+				console.log(trees);
+			}
+			console.log(trees);
+			
+			//Example 2
+			
+			var trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];
+			trees[3] = undefined;
+			if (3 in trees) {
+				// this gets executed
+				console.log(trees);
+			}
+			console.log(trees);
+			
+			//typeof
+			var myFun = new Function('5 + 2');
+			var shape = 'round';
+			var size = 1;
+			var foo = ['Apple', 'Mango', 'Orange'];
+			var today = new Date();
+
+			console.log(typeof myFun);       // returns "function"
+			console.log(typeof shape);       // returns "string"
+			console.log(typeof size);        // returns "number"
+			console.log(typeof foo);         // returns "object"
+			console.log(typeof today);       // returns "object"
+			console.log(typeof doesntExist); // returns "undefined"
+			console.log(typeof true); 		// returns "boolean"
+			console.log(typeof null); 		// returns "object"
+			console.log(typeof 62); 		// returns "number"
+			console.log(typeof 'Hello world'); // returns "string"
+			console.log(typeof document.lastModified); // returns "string"
+			console.log(typeof window.length);         // returns "number"
+			console.log(typeof Math.LN2);              // returns "number"
+			
+			
+			//Relational operators
+			//in
+			var trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];// Arrays
+			console.log(0 in trees);        // returns true
+			console.log(3 in trees);        // returns true
+			console.log(6 in trees);        // returns false
+			console.log('bay' in trees);    // returns false (you must specify the index number, not the value at that index)
+			console.log('length' in trees); // returns true (length is an Array property)
+			// built-in objects
+			console.log('PI' in Math);          // returns true
+			var myString = new String('coral');
+			console.log('length' in myString);  // returns true
+			// Custom objects
+			var mycar = { make: 'Honda', model: 'Accord', year: 1998 };
+			console.log('make' in mycar);  // returns true
+			console.log('model' in mycar); // returns true
+			
+			
+			
+	
+			
+			//document.getElementById("test").innerHTML=a;
+	
+		</script>	
+	</body>
+</html>
