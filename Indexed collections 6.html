@@ -1,0 +1,383 @@
+<html>
+	<header>
+		<title>Training 6</title>
+	</header>
+	<body style=" margin:50px 150px">
+		<h1 style=" text-align:center;"> Javascript  File 6  </h1>
+		<h3 style=" text-align:center;"> Indexed collections </h3>
+		<div class="test">Testting</div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<script> 
+			// Indexed collections
+			/*
+				Arrays
+				Typed arrays
+			*/
+			//Arrays
+			//Array object
+			//Array object : An array is an ordered set of values that you refer to with a name and an index.
+			
+			
+			//Creating an array
+			//The bracket syntax is called an "array literal" or "array initializer."
+			
+			//JavaScript does not have an explicit array data type. 
+			//methods --> such as joining, reversing, and sorting them.  determining the array length and regular expressions.
+			
+			
+			//Example
+			//arrays can also be assigned as a property of a new or an existing object
+			let obj = {}
+			obj.prop = [5, 6, 5]
+			console.log(obj);
+			console.log(obj.prop);
+			
+			// OR
+			let obj2 = {prop: [4, 8,6]}
+			console.log(obj2);
+			console.log(obj2.prop);
+			
+			
+			//Example
+			
+			let arr = [42]       // Creates an array with only one element:... the number 42.
+			console.log("the lenght arr "+arr.length+"..... the value "+ arr);
+			let arr2 = Array(42)  // Creates an array with no elements and arr.length set to 42. 
+			console.log("the lenght arr "+arr2.length+"..... the value "+ arr2);                    
+			// This is equivalent to:
+			let arr3 = []
+			arr.length = 42
+			console.log("the lenght arr "+arr3.length+"..... the value "+ arr3);
+			
+			//Error
+			//let arr = Array(9.3)   // RangeError: Invalid array length
+			
+			//Example create arrays with single elements of an arbitrary data type.
+			let wisenArray = Array.of(9.3);   // wisenArray contains only one element 9.3
+			console.log(wisenArray);
+			
+			//Populating an array
+			
+			//Example
+			let emp = []
+			emp[0] = 'Casey Jones'
+			emp[1] = 'Phil Lesh'
+			emp[2] = 'August West'
+			console.log(emp);
+
+			//If you supply a non-integer value to the array operator in the code above,
+			// a property will be created in the object representing the array, instead of an array element.
+			let arr5 = []
+			arr5[3.4] = 'Oranges'
+			console.log(arr5.length)                 // 0
+			console.log(arr5.hasOwnProperty(3.4))    // true
+			
+			//Example
+			
+			myVar=10;
+			let myArray = new Array('Hello', myVar, 3.14159)
+			console.log(myArray);
+			// OR
+			let myArray2 = ['Mango', 'Apple', 'Orange']
+			console.log(myArray2);
+
+			
+			//Referring to array elements
+			//You refer to an array's elements by using the element's ordinal number. For example, suppose you define the following array:
+			//Example
+			let myArray4 = ['Wind', 'Rain', 'Fire'];
+			console.log(myArray4[0]);
+			console.log(myArray4[1]);
+			console.log(myArray4[2]);
+			console.log(myArray4[3]);
+
+			//Understanding length
+			//JavaScript Array indexes are 0-based: they start at 0, not 1.
+			//This means that the length property will be one more than the highest index stored in the array:
+			
+			//Example about the lenght array
+			let cats = []
+			cats[30] = ['Dusty']
+			console.log(cats.length) // 31
+			console.log(cats) // 31
+
+			//You can also assign to the length property.
+			//Writing a value that is shorter than the number of stored items truncates the array. Writing 0 empties it entirely:
+			
+			let cats2 = ['Dusty', 'Misty', 'Twiggy']
+			console.log(cats2.length)  // 3
+
+			cats.length = 2
+			console.log(cats)  // logs "Dusty, Misty" - Twiggy has been removed
+
+			cats.length = 0 
+			console.log(cats)  // logs []; the cats array is empty
+
+			cats.length = 3 
+			console.log(cats)  // logs [ <3 empty items> ]
+			
+			//Iterating over arrays
+			//Example
+			let colors = ['red', 'green', 'blue']
+			for (let i = 0; i < colors.length; i++) {
+				console.log(colors[i])
+			}
+			
+			//Example
+			
+			let divs = document.getElementsByTagName('div')
+			for (let i = 0, div; div = divs[i]; i++) {
+				console.log(i);
+				console.log(div);
+				console.log(divs[i]);
+			}
+			console.log("the number of div into HTML : "+divs.length);
+
+			//Example
+			let odds = [1,3,5,7,9,11];
+			odds.forEach(function(odd){
+			  console.log(odd)
+			});
+			//or
+			let odds2 = [1,3,5,7,9,11];
+			odds2.forEach(odd => console.log(odd));
+			//anthor Example
+			let colors5 = ['red', 'green', 'blue']
+			colors5.forEach(function(color) {
+			  console.log(color)
+			})
+			// red
+			// green
+			// blue
+
+			let colors6 = ['red', 'green', 'blue']
+			colors6.forEach(color => console.log(color))
+			// red
+			// green
+			// blue
+			
+			//Example
+			let array6 = ['first', 'second', , 'fourth']
+
+			array6.forEach(function(element) {
+			  console.log(element)
+			})
+			// first
+			// second
+			// fourth
+
+			array6.forEach(element => console.log(element));
+			// first
+			// second
+			//undefined
+			// fourth
+
+
+			if (array6[2] === undefined) { 
+			  console.log('array[2] is undefined')  // true
+			} 
+
+			array6 = ['first', 'second', undefined, 'fourth']
+
+			array6.forEach(function(element) {
+			  console.log(element)
+			})
+			// first
+			// second
+			// undefined
+			// fourth
+
+			//Array methods
+			
+			//Example --> concat
+			let myArray11 = new Array('1', '2', '3');
+			console.log(myArray11);
+			myArray = myArray11.concat('a', 'b', 'c');
+			console.log(myArray11);
+			myArray11 = myArray11.concat(myArray11);
+			console.log(myArray11);
+			// myArray is now ["1", "2", "3", "a", "b", "c"]
+			
+			//Example --> join
+			let myArray12 = new Array('Wind', 'Rain', 'Fire')
+			let list = myArray12.join(' - ') // list is "Wind - Rain - Fire"
+			console.log(myArray12);
+			console.log(list);
+			
+			//Example--> push
+			//push() adds one or more elements to the end of an array and returns the resulting length of the array.
+			let myArray13 = new Array('1', '2');
+			myArray13.push('3');  // myArray13 is now ["1", "2", "3"]
+			console.log(myArray13);
+
+			//Example--> pop
+			//pop() removes the last element from an array and returns that element.
+			myArray13 = new Array('1', '2', '3');
+			let last = myArray13.pop(); // myArray13 is now ["1", "2"], last = "3"
+			console.log(myArray13);
+
+			//Example--> shift
+			//shift() removes the first element from an array and returns that element.
+			myArray13 = new Array('1', '2', '3');
+			let first = myArray13.shift(); // myArray13 is now ["2", "3"], first is "1"
+			console.log(myArray13);
+
+			//Example--> unshift
+			//unshift() adds one or more elements to the front of an array and returns the new length of the array.
+			myArray13 = new Array('1', '2', '3');
+			myArray13.unshift('4', '5'); // myArray13 becomes ["4", "5", "1", "2", "3"]
+			console.log(myArray13);
+
+			//Example--> slice
+			//slice(start_index, upto_index) extracts a section of an array and returns a new array.
+			myArray13 = new Array('a', 'b', 'c', 'd', 'e');
+			myArray13 = myArray13.slice(1, 4);  // starts at index 1 and extracts all elements until index 3, returning [ "b", "c", "d"]
+			console.log(myArray13);
+
+			//splice(index, count_to_remove, addElement1, addElement2, ...) removes elements from an array and (optionally) replaces them.
+			// It returns the items which were removed from the array.
+			myArray13 = new Array('1', '2', '3', '4', '5');
+			myArray13.splice(1, 3, 'a', 'b', 'c', 'd'); // myArray13 is now ["1", "a", "b", "c", "d", "5"]
+			console.log(myArray13);
+			// This code started at index one (or where the "2" was), 
+			// removed 3 elements there, and then inserted all consecutive
+			// elements in its place.
+
+			//Example--> reverse
+			//reverse() transposes the elements of an array, in place:
+			//the first array element becomes the last and the last becomes the first. It returns a reference to the array.
+			myArray13 = new Array('1', '2', '3');
+			myArray13.reverse();// transposes the array so that myArray13 = ["3", "2", "1"]
+			console.log(myArray13);
+
+			//Example--> sort
+			//sort() sorts the elements of an array in place, and returns a reference to the array.
+			myArray13 = new Array('Wind', 'Rain', 'Fire');
+			myArray13.sort();// sorts the array so that myArray = ["Fire", "Rain", "Wind"]
+			console.log(myArray13);
+			
+			//sort() can also take a callback function to determine how array elements are compared.
+			myArray13 = new Array('Wind', 'Rain', 'Fire');
+			let sortFn = function(a, b) {
+				if (a[a.length - 1] < b[b.length - 1]) return -1;
+				if (a[a.length - 1] > b[b.length - 1]) return 1;
+				if (a[a.length - 1] == b[b.length - 1]) return 0;
+			}
+			myArray13.sort(sortFn);
+			console.log(myArray13);
+			
+			
+			//Example --> indexOf
+			//indexOf(searchElement[, fromIndex]) searches the array for searchElement and returns the index of the first match.
+			let a = ['a', 'b', 'a', 'b', 'a']; 
+			console.log(a.indexOf('b'));     // logs 1
+
+			// Now try again, starting from after the last match
+			console.log(a.indexOf('b', 2));  // logs 3
+			console.log(a.indexOf('z'));     // logs -1, because 'z' was not found
+
+			//Example --> lastIndexOf
+			//lastIndexOf(searchElement[, fromIndex]) works like indexOf, but starts at the end and searches backwards.
+			//startting index in 1 not 0 
+			a = ['a', 'b', 'c', 'd', 'a', 'b'];
+			console.log(a.lastIndexOf('b'));     // logs 5
+
+			// Now try again, starting from before the last match
+			console.log(a.lastIndexOf('b', 4));  // logs 1
+			console.log(a.lastIndexOf('z'));     // logs -1
+
+			//forEach(callback[, thisObject]) executes callback on every array item and returns undefined.
+			a = ['a', 'b', 'c'];
+			a.forEach(function(element) { console.log(element) });
+			// logs each item in turn
+			//a b c
+
+			//Example --> map and toUpperCase
+			//map(callback[, thisObject]) returns a new array of the return value from executing callback on every array item.
+			let a1 = ['a', 'b', 'c'];
+			let a2 = a1.map(function(item) { return item.toUpperCase() });
+			console.log(a2); // logs ['A', 'B', 'C']
+
+
+			//Example --> filter
+			//filter(callback[, thisObject]) returns a new array containing the items for which callback returned true.
+			a1 = ['a', 10, 'b', 20, 'c', 30];
+			a2 = a1.filter(function(item) { return typeof item === 'number'; });
+			console.log(a2);  // logs [10, 20, 30]
+
+			//Example --> every
+			//every(callback[, thisObject]) returns true if callback returns true for every item in the array.
+			function isNumber(value) {
+			  return typeof value === 'number';
+			}
+			//every --> all item is true
+			a1 = [1, 2, 3];
+			console.log("isNumber.. every case 1 "+a1.every(isNumber));  // isNumber.. every case 1 true
+			a2 = [1, '2', 3]; 
+			console.log("isNumber.. every case 2 "+a2.every(isNumber));  // isNumber.. every case 2 false
+
+			//Example --> some
+			//some(callback[, thisObject]) returns true if callback returns true for at least one item in the array.
+			function isNumber2(value) {
+			  return typeof value === 'number';
+			}
+			//some --> at last one item
+			a1 = [1, 2, 3];
+			console.log("isNumber.. some case 1 "+a1.some(isNumber));  // isNumber.. some case 1  true
+			a2 = ['1', '2', 3];
+			console.log("isNumber.. some case 2 "+a2.some(isNumber));  // isNumber.. some case 2  true
+			a3 = ['1', '2', '3'];
+			console.log("isNumber.. some case 3 "+a3.some(isNumber));  // isNumber.. some case 3  false
+
+			//Example-->reduce 
+			let ab = [10, 50, 20, 30];
+			let total = ab.reduce(function(accumulator, currentValue) { return accumulator + currentValue }, 0);
+			console.log(total); // Prints 110
+			
+			//Multi-dimensional arrays
+			let aa = new Array(4);
+			for (let i = 0; i < 4; i++) {
+				aa[i] = new Array(4);
+				for (let j = 0; j < 4; j++) {
+					aa[i][j] = '[' + i + ', ' + j + ']';
+				}
+				console.log(aa[i]);
+			}
+			console.log(aa);
+			
+			//Arrays and regular expressions
+			//Working with array-like objects
+			
+			function printArguments() {
+				Array.prototype.forEach.call(arguments, function(item) {
+					console.log(item);
+				});
+				Array.prototype.forEach.call('a string', function(chr) {
+					console.log(chr);
+				});
+			}
+			printArguments(1,2,3,4,5,67,7,89,'an','younes','hhh','toto',10);
+			
+			
+			
+			
+			
+			
+			//Typed arrays
+	
+	
+	
+	
+	
+			
+			//document.getElementById("test").innerHTML=a;
+	
+		</script>	
+	</body>
+</html>
