@@ -1,0 +1,413 @@
+<html>
+	<header>
+		<title>Training 7</title>
+	</header>
+	<body style=" margin:50px 150px">
+		<h1 style=" text-align:center;"> Javascript  File 7  </h1>
+		<h3 style=" text-align:center;"> Working with objects </h3>
+		<div class="test">Testting</div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<script> 
+			// Working with objects
+			/*
+			Objects and properties
+			Creating objects
+			Defining methods
+			Getter and setter
+			*/
+			// JavaScript is designed on a simple object-based paradigm.
+			
+			
+			//Objects and properties
+			//Like all JavaScript variables, both the object name (which could be a normal variable) 
+			//and property name are case sensitive. You can define a property by assigning it a value. 
+			
+			//Example about in properties
+			var myCar = new Object();
+			myCar.make = 'Ford';
+			myCar.model = 'Mustang';
+			myCar.year = 1969;
+			myCar.coler ="red"
+			console.log(myCar);
+					
+			// associative arrays
+			//another wey to access the properties
+			myCar['make'] = 'Honday';
+			myCar['model'] = 'Mustang2';
+			myCar['year'] = 1975;
+			myCar['coler']='blue';
+			console.log(myCar);
+			
+			//Example
+			// four variables are created and assigned in a single go, 
+			// separated by commas
+			var myObj = new Object(),
+				str = 'myString',
+				rand = Math.random(),
+				obj = new Object();
+
+			myObj.type              = 'Dot syntax';
+			myObj['date created']   = 'String with space';
+			myObj[str]              = 'String value';
+			myObj[rand]             = 'Random Number';
+			myObj[obj]              = 'Object';
+			myObj['']               = 'Even an empty string';
+			console.log(myObj);
+
+			//Example 
+			var propertyName = 'make',
+				myCar2 = new Object(); 
+			myCar2[propertyName] = 'Ford';
+
+			propertyName = 'model';
+			myCar2[propertyName] = 'Mustang';
+			console.log(myCar2);
+			
+			
+			//Example
+			// obj.hasOwnProperty() is used to filter out properties from the object's prototype chain		
+			function showProps(obj, objName) {
+				var result = ``;
+				for (var i in obj) {
+					if (obj.hasOwnProperty(i)) {
+						result += `${objName}.${i} = ${obj[i]}\n`;
+					}
+				}
+				return result;
+			}
+			//or 
+			function showProps2(obj, objName) {
+				var result = '';
+				for (var i in obj) {
+					if (obj.hasOwnProperty(i)) {
+						result += objName+'.'+i+' = ' +obj[i]+'\n';
+					}
+				}
+				return result;
+			}
+
+			var myCar3 = new Object(); 
+			myCar3.make  = 'Ford';
+			myCar3.model = 'Mustang';
+			myCar3.year  = 1969;
+
+			console.log(showProps(myCar3,"myCar3")+"\n");
+			console.log(showProps2(myCar3,"myCar3"));
+			
+			
+			//Enumerate the properties of an object
+			//Example
+			//This can be useful to reveal "hidden" properties (properties in the prototype chain which are not accessible through the object,
+			//because another property has the same name earlier in the prototype chain). 
+			function listAllProperties(o) {
+				var objectToInspect;     
+				var result = [];
+				let x=1;
+				for(objectToInspect = o; objectToInspect !== null; objectToInspect = Object.getPrototypeOf(objectToInspect)) {  
+					result = result.concat(Object.getOwnPropertyNames(objectToInspect));
+				}
+				return result; 
+			}
+			var myCar4 = new Object(); 
+			myCar4.make  = 'Ford';
+			myCar4.model = 'Mustang';
+			myCar4	.year  = 1969;
+			console.log(listAllProperties(myCar4));			
+			
+			
+			
+			//Creating objects
+			//Using object initializers
+			
+			//where obj is the name of the new object, each property_i is an identifier (either a name, a number, or a string literal),
+			//and each value_i is an expression whose value is assigned to the property_i.
+			
+			//Example
+			var obj1 = {
+				property_1   :   5,   // property_# may be an identifier...
+				2            :   6,   // or a number...
+				'property n' :   2,   // or a string
+ 
+			}; 			
+			console.log(obj1);
+			
+			//Example
+			if (1) var x = {greeting: 'hi there'};
+			console.log(x);
+			if (0) var y = {greeting: 'hi there'};
+			console.log(y);
+			
+			//Example creates myHonda with three properties. Note that the engine property is also an object with its own properties.
+			var myHonda = {color: 'red', wheels: 4, engine: {cylinders: 4, size: 2.2}};
+			console.log(myHonda);
+			console.log(myHonda.engine);
+			
+			
+			//Using a constructor function
+			//To define an object type, create a function for the object type that specifies its name, properties, and methods.
+			
+			//Example
+			
+			function Car(make, model, year) {
+				this.make = make;
+				this.model = model;
+				this.year = year;
+			}
+			//This statement creates mycar and assigns it the specified values for its properties. 
+			//Then the value of mycar.make is the string "Eagle", mycar.year is the integer 1993, and so on.
+			var myCar = new Car('Eagle', 'Talon TSi', 1993);
+			console.log(myCar);
+			//You can create any number of Car objects by calls to new. For example,
+			var kenscar = new Car('Nissan', '300ZX', 1992);
+			var vpgscar = new Car('Mazda', 'Miata', 1990);
+			console.log(kenscar);
+			console.log(vpgscar);
+			
+			//Example
+			//An object can have a property that is itself another object.
+			//For example, suppose you define an object called person as follows:
+			function Person(name, age, sex) {
+				this.name = name;
+				this.age = age;
+				this.sex = sex;
+			}
+
+			//Then, you can rewrite the definition of Car to include an owner property that takes a person object, as follows:
+			function Car0(make, model, year, owner) {
+				this.make = make;
+				this.model = model;
+				this.year = year;
+				this.owner = owner;//person object
+			}
+
+			//and then instantiate two new person objects as follows:
+			//internal object
+			var rand = new Person('Rand McKinnon', 33, 'M');
+			var ken = new Person('Ken Jones', 39, 'M');
+			console.log(rand);
+			console.log(ken);
+
+			//To instantiate the new objects, you then use the following:
+			//External object
+			var car1 = new Car0('Eagle', 'Talon TSi', 1993, rand);
+			var car2 = new Car0('Nissan', '300ZX', 1992, ken);
+			console.log(car1);
+			console.log(car2);
+
+			//Notice that instead of passing a literal string or integer value when creating the new objects,
+			// the above statements pass the objects rand and ken as the arguments for the owners.
+			// Then if you want to find out the name of the owner of car2, you can access the following property:
+			console.log(car2.owner.name);
+			console.log(car2.owner.age);
+
+			//Note that you can always add a property to a previously defined object. For example, the statement
+			console.log(car1);
+			car1.color = 'black';
+			console.log(car1);
+			//adds a property color to car1, and assigns it a value of "black." However, this does not affect any other objects.
+			// To add the new property to all objects of the same type, you have to add the property to the definition of the Car object type.
+						
+			//Using the Object.create method
+			//Example
+			// Animal properties and method encapsulation
+			
+			var Animal = {
+				type: 'Invertebrates', // Default value of properties
+				// Method which will display type of Animal
+				displayType: function() {  
+					console.log(this.type);
+				}
+			};
+			// Create new animal type called animal1 
+			var animal1 = Object.create(Animal);
+			animal1.displayType(); // Output: Invertebrates
+
+			// Create new animal type called Fishes
+			var fish = Object.create(Animal);
+			fish.type = 'Fishes';
+			fish.displayType(); // Output: Fishes
+			
+			
+			//Inheritance
+			//All objects in JavaScript inherit from at least one other object. The object being inherited from is known as the prototype,
+			//and the inherited properties can be found in the prototype object of the constructor. 
+			
+			
+			//Defining properties for an object type
+			//Example
+			function Car11(make, model, year, owner) {
+				this.make = make;
+				this.model = model;
+				this.year = year;
+				this.owner = owner;
+			}
+			var Car10 = new Car11("Ford",2020,1950,'younes');
+			var Car20 = new Car11("kia",20200,10950,'younes');
+			console.log(Car10);
+			console.log(Car20.color); // undefined
+			Car11.prototype.color = null; ////add color propertes in all object
+			Car10.color = 'black';
+			console.log(Car10);
+			console.log(Car20);
+			console.log(Car20.color); //null
+						
+			
+			//Defining methods
+			
+			//A method is a function associated with an object, or, simply put, a method is a property of an object that is a function.
+			//Methods are defined the way normal functions are defined, except that they have to be assigned as the property of an object. 
+			//objectName.methodname = functionName;
+			var myObj = {
+				myMethod: function(params) {
+					console.log(params);
+				},
+				// OR THIS WORKS TOO
+				myOtherMethod(params) {
+					console.log(params);
+				},
+			};
+			myObj.myMethod('test1');
+			myObj.myMethod('test2');
+
+			
+			//Example
+			
+			function displayCar() {
+				var result = `A Beautiful ${this.year} ${this.make} ${this.model}`;
+				//pretty_print(result);
+				console.log(result);
+			}
+
+			//to the object definition. So, the full definition of Car would now look like
+			function Car55(make, model, year, owner) {
+				this.make = make;
+				this.model = model;
+				this.year = year;
+				this.owner = owner;
+				this.displayCar = displayCar;//You can make this function a method of Car by adding the statement
+			}
+			var car30 = new Car55("ford",70,1980,"I");
+			var car40 = new Car55("ford2",70,1980,"I");
+			//Then you can call the displayCar method for each of the objects as follows:
+			car30.displayCar();
+			car40.displayCar();
+			
+			//Using this for object references
+			
+			//Example
+			const Manager = {
+				name: "shox",
+				age: 32,
+				job: "Software Engineer && Front End Developer"
+			}
+			const Intern= {
+				name: "AlBetawi",
+				age: 22,
+				job: "Front End Intern"
+			}
+
+			function sayHi() {
+				console.log('Hello, my name is', this.name)
+			}
+			function howOldAmI (){
+				console.log('I am ' + this.age + ' years old.')
+			}
+
+			// add sayHi function to both objects
+			Manager.sayHi = sayHi;
+			Intern.sayHi = sayHi;
+			Manager.howOldAmI = howOldAmI;
+			Intern.howOldAmI = howOldAmI;
+
+
+			Manager.sayHi() // Hello, my name is shox'
+			Manager.howOldAmI() // I am 32 years old.
+			console.log(Manager);
+
+			Intern.sayHi() // Hello, my name is AlBetawi'
+			Intern.howOldAmI() // I am 22 years old.
+			console.log(Intern);
+
+			
+			//Getter and setter
+			//A getter is a method that gets the value of a specific property. 
+			//A setter is a method that sets the value of a specific property.
+
+			// You can define getters and setters on any predefined core object or user-defined object that supports the addition of new properties. 
+
+			//Getters and setters can be either
+			// - defined using object initializers, or
+			// - added later to any object at any time using a getter or setter adding method.
+			//Example
+			var objj = {
+				a: 7,
+				get b() { 
+					return this.a + 1;
+				},
+				set c(x) {
+					this.a = x / 2;
+				}
+			};
+
+			console.log(objj.a); // 7
+			console.log(objj.b); // 8 <-- At this point the get b() method is initiated.
+			objj.c = 50;         //   <-- At this point the set c(x) method is initiated
+			console.log(objj.a); // 25			
+			
+			//Example
+			//
+			var oo = { a: 0 };
+			Object.defineProperties(oo, {
+				'b': { get: function() { return this.a + 1; } },
+				'c': { set: function(x) { this.a = x / 2; } },
+			});
+
+			oo.c = 10; // Runs the setter, which assigns 10 / 2 (5) to the 'a' property
+			console.log(oo.b); // Runs the getter, which yields a + 1 or 6
+			
+			//Deleting properties
+			
+			//Example
+			// Creates a new object, myobj, with two properties, a and b.
+			var myobj0 = new Object;
+			myobj0.a = 5;
+			myobj0.b = 12;
+			console.log(myobj0);
+
+			// Removes the a property, leaving myobj with only the b property.
+			delete myobj0.a;
+			console.log ('a' in myobj0); // output: "false"
+			console.log (myobj0.a); // undefined
+			console.log(myobj0);
+			
+			//Comparing objects
+			// Two variables, two distinct objects with the same properties
+			var fruit = {name: 'apple'};
+			var fruitbear = {name: 'apple'};
+
+			console.log(fruit == fruitbear); // return false
+			console.log(fruit === fruitbear); // return false
+			
+			//another Example
+			// Two variables, a single object
+			fruit = {name: 'apple'};
+			fruitbear = fruit;  // Assign fruit object reference to fruitbear
+
+			// Here fruit and fruitbear are pointing to same object
+			console.log(fruit == fruitbear); // return true
+			console.log(fruit === fruitbear); // return true
+
+			fruit.name = 'grape';
+			console.log(fruitbear); // output: { name: "grape" }, instead of { name: "apple" }
+			
+			//document.getElementById("test").innerHTML=a;
+	
+		</script>	
+	</body>
+</html>
