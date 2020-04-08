@@ -1,0 +1,380 @@
+<html>
+	<header>
+		<title>Training 8</title>
+	</header>
+	<body style=" margin:50px 150px">
+		<h1 style=" text-align:center;"> Javascript  File 8  </h1>
+		<h3 style=" text-align:center;"> Details of the object model </h3>
+		<div class="test">Testting</div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<script> 
+			// Details of the object model
+			/*
+			Prototype-based OOP
+			Creating object hierarchies
+			Inheritance			
+			*/
+			
+			//Class-based vs. prototype-based languages
+			//Class-based object-oriented languages, such as Java and C++, are founded on the concept of two distinct entities: classes and instances.
+			/*  prototype-based language,
+				it simply has objects. A prototype-based language has the notion of a prototypical object,
+				an object used as a template from which to get the initial properties for a new object. Any object can specify its own properties, 
+				either when you create it or at run time.In addition, any object can be associated as the prototype for another object,
+				allowing the second object to share the first object's properties.
+			*/
+			
+		
+			//Defining a class
+			//Example
+			
+			//JavaScript (using this may cause an error for the following examples).
+			class Employee0 {
+				constructor() {
+					this.name = '';
+					this.dept = 'general';
+				}
+			}
+			//JavaScript ** (use this instead)
+			function Employee() {
+				this.name = '';
+				this.dept = 'general';
+			}
+
+			var x = new Employee();
+			var y = new Employee0();
+			console.log(x);
+			console.log(y);
+
+			function Manager() {
+				Employee.call(this);
+				this.reports = [];
+			}
+
+			function WorkerBee() {
+				Employee.call(this);
+				this.projects = [];
+			}
+
+			Manager.prototype = Object.create(Employee.prototype);
+			Manager.prototype.constructor = Manager;
+			x= new Manager();
+			console.log(x);
+
+			WorkerBee.prototype = Object.create(Employee.prototype);
+			WorkerBee.prototype.constructor = WorkerBee;
+			x= new WorkerBee();
+			console.log(x);
+
+
+			function SalesPerson() {
+				WorkerBee.call(this);
+				this.dept = 'sales';
+				this.quota = 100;
+			}
+
+			function Engineer() {
+				WorkerBee.call(this);
+				this.dept = 'engineering';
+				this.machine = '';
+			}
+
+			SalesPerson.prototype = Object.create(WorkerBee.prototype);
+			SalesPerson.prototype.constructor = SalesPerson;
+			x= new SalesPerson();
+			console.log(x.dept);
+
+
+			Engineer.prototype = Object.create(WorkerBee.prototype);
+			Engineer.prototype.constructor = Engineer;
+			x= new Engineer();
+			console.log(x);
+
+			//Creating objects with simple definitions
+			//Object hierarchy
+			
+			var jim = new Employee; 
+			var sally = new Manager;
+			var mark = new WorkerBee;
+			var fred = new SalesPerson;
+			var jane = new Engineer;
+
+			console.log(jim);
+			console.log(sally);
+			console.log(mark);
+			console.log(fred);
+			console.log(jane);
+
+			/*
+			reslt
+			Employee {
+			name:"",
+			dept:"general"
+			}
+
+			Manager {
+			name:"",
+			dept:"general",
+			reports:(0) [...]
+			}
+
+
+			WorkerBee {
+			name:"",
+			dept:"general",
+			projects:(0) [...]
+			}
+
+			SalesPerson {
+			name:"",
+			dept:"sales",
+			projects:(0) [...],
+			quota:100
+			}
+
+			Engineer {
+			name:"",
+			dept:"engineering",
+			projects:(0) [...],
+			machine:""
+			}
+		*/
+		
+		
+			console.log(mark);
+			//Inheriting properties
+			mark.name = 'Doe, Mark';
+			mark.dept = 'admin';
+			mark.projects = ['navigator'];
+			console.log(mark);
+			//Adding properties
+			//Now, the mark object has a bonus property, but no other WorkerBee has this property.
+			mark.bonus = 3000;
+			console.log(mark);
+
+			//Adding properties on all Object-defined to the inherited prototype
+			Employee.prototype.specialty = '555';
+			x = new Employee();
+			console.log(x.specialty);
+
+
+			//Example
+			
+			function Employee1(name, dept) {
+				this.name = name || '';
+				this.dept = dept || 'general';
+			}
+			function WorkerBee1(projs) {
+				this.projects = projs || [];
+			}
+			function Engineer1(mach) {
+				this.dept = 'engineering';
+				this.machine = mach || '';
+			}
+
+			WorkerBee1.prototype = new Employee1();
+			Engineer1.prototype = new WorkerBee1();
+			/*
+			x.name == '';
+			x.dept == 'engineering';
+			x.projects == [];
+			x.machine == 'belau';
+			*/
+
+			x = new Engineer1("belau");
+			console.log("name : "+x.name+"\ndept : " +x.dept +"\nproject : " +x.projects+'\nmachine : '+x.machine);
+
+			//or Example
+			
+			function Employee2(name, dept) {
+				this.name = name || '';
+				this.dept = dept || 'general';
+			}
+			function WorkerBee2(name, dept, projs) {
+				this.base = Employee2;
+				this.base(name, dept);
+				this.projects = projs || [];
+			}
+			function Engineer2(name, projs, mach) {
+				this.base = WorkerBee2;
+				this.base(name, 'engineering', projs);
+				this.machine = mach || '';
+			}
+
+			x = new Engineer2('Doe, Jane', ['navigator', 'javascript'], 'belau');
+			console.log("name : "+x.name+"\ndept : " +x.dept +"\nproject : " +x.projects+'\nmachine : '+x.machine);
+
+			//Example
+			//The jane object does not inherit the specialty property. You still need to explicitly set up the prototype to ensure dynamic inheritance. Assume instead you have these statements:
+			Employee2.prototype.specialty = 'none';
+			console.log(x.specialty);
+
+			// or use call
+			function Engineer4(name, projs, mach) {
+				WorkerBee2.call(this, name, 'engineering', projs);
+				this.machine = mach || '';
+			}
+			
+			x = new Engineer4('Doe, Jane', ['navigator', 'javascript'], 'belau');
+			console.log(x);
+			
+			
+		 
+			//Property inheritance revisited
+			//Local versus inherited values
+			
+			//Example
+			function Employee3() {
+				this.dept = 'general';    // Note that this.name (a local variable) does not appear here
+			}
+			Employee3.prototype.name = '...';    // A single copy
+
+			function WorkerBee3() {
+				this.projects = [];
+			}
+			WorkerBee3.prototype = new Employee3;
+			var amy = new WorkerBee3;
+
+			//does not change the new value to all the instances of Employee defined
+			console.log(amy.dept);
+			Employee3.prototype.dept = 'Unknown';
+			console.log(amy.dept);//
+
+			//change the value of an object property at run time and have the new value be inherited by all descendants of the object.
+			console.log(amy.name);
+			Employee3.prototype.name = 'Unknown';
+			console.log(amy.name);
+			// you should set the properties in the constructor's prototype, not in the constructor function itself.
+
+			//Determining instance relationships.
+			//Example
+			function Foo(){
+				console.log("younes");
+			}
+			var f = new Foo();//younes
+			var isTrue = (f instanceof Foo);
+			console.log(isTrue);//true
+			
+			
+			//Global information in constructors
+			//Example
+			var idCounter = 1;
+
+			function Employee5(name, dept) {
+			   this.name = name || '';
+			   this.dept = dept || 'general';
+			   this.id = idCounter++;
+			}
+			var victoria = new Employee5('Pigbert, Victoria', 'pubs');
+			var harry = new Employee5('Tschopik, Harry', 'sales');
+			console.log(idCounter);//3
+			console.log(victoria.id);//1
+			console.log(harry.id);//2
+
+
+			//Example
+
+
+			var idCounter2 = 1;
+
+			function Employee6(name, dept) {
+				this.name = name || '';
+				this.dept = dept || 'general';
+				this.id = idCounter2++;
+			}
+
+			function Manager6(name, dept, reports) {
+				this.reports = reports || '';
+			}
+			Manager6.prototype = new Employee6();
+
+			function WorkerBee6(projs) {
+				this.projs = projs || '';
+			}
+			WorkerBee6.prototype = new Employee6();
+
+			function Engineer6( mach) {
+				this.mach = mach || '';
+			}
+			Engineer6.prototype = new WorkerBee6();
+
+			function SalesPerson6(quota) {
+				this.quota = quota;
+			}
+
+			SalesPerson6.prototype = new WorkerBee6();
+
+			var mac = new Engineer6('Wood, Mac');
+			var mac2 = new Engineer6('Wood, Mac');
+			console.log(idCounter2);
+			console.log(mac);
+			console.log(mac2);
+			
+			
+			//solutions
+			function Employee7(name, dept) {
+				this.name = name || '';
+				this.dept = dept || 'general';
+				if (name)
+					this.id = idCounter++;
+			}
+
+			//WorkerBee.prototype = Object.create(Employee.prototype);
+			// instead of WorkerBee.prototype = new Employee
+
+			//No multiple inheritance but can 
+
+			function Employee8(name, dept) {
+				this.name = name || '';
+				this.dept = dept || 'general';
+			}
+			function WorkerBee8(name, dept, projs) {
+				this.base = Employee8;
+				this.base(name, dept);
+				this.projects = projs || [];
+			}
+			function Hobbyist(hobby) {
+				this.hobby = hobby || 'scuba';
+			}
+
+			function Engineer8(name, projs, mach, hobby) {
+				this.base1 = WorkerBee8;
+				this.base1(name, 'engineering', projs);
+				this.base2 = Hobbyist;
+				this.base2(hobby);
+				this.machine = mach || '';
+			}
+			Engineer8.prototype = new WorkerBee8;
+
+			var dennis = new Engineer8('Doe, Dennis', ['collabra'], 'hugo');
+			console.log(dennis);
+			console.log(dennis.name == 'Doe, Dennis');
+			console.log(dennis.dept == 'engineering');
+			console.log(dennis.projects[0] == ['collabra']);
+			console.log(dennis.machine == 'hugo');
+			console.log(dennis.hobby == 'scuba');
+						
+			//The dennis object does not inherit this new property.			
+			Hobbyist.prototype.equipment = ['mask', 'fins', 'regulator', 'bcd'];
+			console.log(dennis.equipment);
+
+
+
+
+			
+			
+
+
+
+			
+			//document.getElementById("test").innerHTML=a;
+	
+		</script>	
+	</body>
+</html>
